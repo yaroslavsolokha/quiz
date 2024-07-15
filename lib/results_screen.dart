@@ -8,9 +8,11 @@ class ResultsScreen extends StatelessWidget {
     super.key,
     required this.chosenAnswers,
     required this.onRestart,
+    required this.onHome,
   });
 
   final void Function() onRestart;
+  final void Function() onHome;
 
   final List<String> chosenAnswers;
 
@@ -45,12 +47,13 @@ class ResultsScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'You answered $numCorrectQuestions out of $numTotalQuestions questions correctly!',
+              'You answered $numCorrectQuestions out of $numTotalQuestions questions!',
               style: GoogleFonts.lato(
                 color: Colors.amber,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(
               height: 30,
@@ -65,7 +68,15 @@ class ResultsScreen extends StatelessWidget {
                 foregroundColor: Colors.white,
               ),
               icon: const Icon(Icons.refresh),
-              label: const Text('Restart Quiz!'),
+              label: const Text('Restart Quiz'),
+            ),
+            TextButton.icon(
+              onPressed: onRestart, //todo finish it
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.white,
+              ),
+              icon: const Icon(Icons.home),
+              label: const Text('Go Home'),
             )
           ],
         ),

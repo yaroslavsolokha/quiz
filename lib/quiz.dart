@@ -30,6 +30,13 @@ class _QuizState extends State<Quiz> {
     });
   }
 
+  void homePage() {
+    setState(() {
+      selectedAnswers = [];
+      activeScreen = 'start-screen';
+    });
+  }
+
   void chooseAnswer(String answer) {
     selectedAnswers.add(answer);
 
@@ -52,6 +59,7 @@ class _QuizState extends State<Quiz> {
       screenWidget = ResultsScreen(
         chosenAnswers: selectedAnswers,
         onRestart: restartQuiz,
+        onHome: homePage,
       );
     }
 
