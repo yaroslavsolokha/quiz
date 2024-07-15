@@ -4,9 +4,14 @@ import 'package:quiz/answer_button.dart';
 import 'package:quiz/data/questions.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({super.key, required this.onSelectAnswer});
+  const QuestionsScreen({
+    super.key,
+    required this.onSelectAnswer,
+    required this.onHome,
+  });
 
   final void Function(String answer) onSelectAnswer;
+  final void Function() onHome;
 
   @override
   State<QuestionsScreen> createState() {
@@ -57,6 +62,14 @@ class _QueztionsState extends State<QuestionsScreen> {
                 },
               );
             }),
+            TextButton.icon(
+              onPressed: widget.onHome,
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.white,
+              ),
+              icon: const Icon(Icons.home),
+              label: const Text('Go Home'),
+            )
           ],
         ),
       ),

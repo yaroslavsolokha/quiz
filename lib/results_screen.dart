@@ -71,7 +71,7 @@ class ResultsScreen extends StatelessWidget {
               label: const Text('Restart Quiz'),
             ),
             TextButton.icon(
-              onPressed: onRestart, //todo finish it
+              onPressed: onHome,
               style: TextButton.styleFrom(
                 foregroundColor: Colors.white,
               ),
