@@ -7,34 +7,31 @@ class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({
     super.key,
     required this.onSelectAnswer,
-    required this.onHome,
   });
 
   final void Function(String answer) onSelectAnswer;
-  final void Function() onHome;
 
   @override
   State<QuestionsScreen> createState() {
-    return _QueztionsState();
+    return _QuestionsScreenState();
   }
 }
 
-class _QueztionsState extends State<QuestionsScreen> {
+class _QuestionsScreenState extends State<QuestionsScreen> {
   var currentQuestionIndex = 0;
 
   void answerQuestion(String selectedAnswer) {
     widget.onSelectAnswer(selectedAnswer);
-    //currentQuestionIndex = currentQuestionIndex + 1;
-    //currentQuestionIndex += 1;
-
+    // currentQuestionIndex = currentQuestionIndex + 1;
+    // currentQuestionIndex += 1;
     setState(() {
-      currentQuestionIndex++;
+      currentQuestionIndex++; // increments the value by 1
     });
   }
 
   @override
-  Widget build(BuildContext context) {
-    var currentQuestion = questions[currentQuestionIndex];
+  Widget build(context) {
+    final currentQuestion = questions[currentQuestionIndex];
 
     return SizedBox(
       width: double.infinity,
@@ -61,15 +58,7 @@ class _QueztionsState extends State<QuestionsScreen> {
                   answerQuestion(answer);
                 },
               );
-            }),
-            TextButton.icon(
-              onPressed: widget.onHome,
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.white,
-              ),
-              icon: const Icon(Icons.home),
-              label: const Text('Go Home'),
-            )
+            })
           ],
         ),
       ),

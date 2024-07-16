@@ -14,55 +14,45 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  List<String> selectedAnswers = [];
-  var activeScreen = 'start-screen';
+  List<String> _selectedAnswers = [];
+  var _activeScreen = 'start-screen';
 
-  void switchScreen() {
+  void _switchScreen() {
     setState(() {
-      activeScreen = 'questions-screen';
+      _activeScreen = 'questions-screen';
     });
   }
 
-  void restartQuiz() {
-    setState(() {
-      selectedAnswers = [];
-      activeScreen = 'questions-screen';
-    });
-  }
+  void _chooseAnswer(String answer) {
+    _selectedAnswers.add(answer);
 
-  void homePage() {
-    setState(() {
-      selectedAnswers = [];
-      activeScreen = 'start-screen';
-    });
-  }
-
-  void chooseAnswer(String answer) {
-    selectedAnswers.add(answer);
-
-    if (selectedAnswers.length == questions.length) {
+    if (_selectedAnswers.length == questions.length) {
       setState(() {
-        activeScreen = 'results-screen';
+        _activeScreen = 'results-screen';
       });
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    Widget screenWidget = StartScreen(switchScreen);
+  void restartQuiz() {
+    setState(() {
+      _activeScreen = 'questions-screen';
+    });
+  }
 
-    if (activeScreen == 'questions-screen') {
+  @override
+  Widget build(context) {
+    Widget screenWidget = StartScreen(_switchScreen);
+
+    if (_activeScreen == 'questions-screen') {
       screenWidget = QuestionsScreen(
-        onSelectAnswer: chooseAnswer,
-        onHome: homePage,
+        onSelectAnswer: _chooseAnswer,
       );
     }
 
-    if (activeScreen == 'results-screen') {
+    if (_activeScreen == 'results-screen') {
       screenWidget = ResultsScreen(
-        chosenAnswers: selectedAnswers,
+        chosenAnswers: _selectedAnswers,
         onRestart: restartQuiz,
-        onHome: homePage,
       );
     }
 
@@ -72,8 +62,8 @@ class _QuizState extends State<Quiz> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.deepPurple,
-                Colors.purpleAccent,
+                Color.fromARGB(255, 78, 13, 151),
+                Color.fromARGB(255, 107, 15, 168),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
